@@ -1,0 +1,36 @@
+package br.com.fiap.locadora.main.funcionario;
+
+import br.com.fiap.locadora.connection.ConnectionFactory;
+import br.com.fiap.locadora.dao.FuncionarioDao;
+import br.com.fiap.locadora.model.Funcionario;
+
+import javax.swing.*;
+import java.sql.Connection;
+import java.util.List;
+
+public class ListarPorLocadoraDaoTest {
+    public static void main(String[] args) {
+        // Pedindo o id da locadora ao usuário
+        int idConcess = Integer.parseInt(JOptionPane.showInputDialog("Qual a locadora que você deseja ver os funcionários?"));
+
+        // Usando try-with-resources para garantir que a conexão seja fechada
+        try (Connection conn = ConnectionFactory.getConnection()) {
+            // Criando o DAO
+            FuncionarioDao dao = new FuncionarioDao(conn);
+
+            // Criando a lista de exibição e exibindo os dados encontrados
+            List<Funcionario> lista = dao.pesquisaPorLocadora(idConcess);
+
+            if (lista.isEmpty()) {
+                System.out.println("Nenhum funcionário encontrado para a locadora com ID: " + idConcess);
+            } else {
+                for (Funcionario f : lista) {
+                    System.out.println(f + "\n");
+                }
+                System.out.println("Funcionários que trabalham nessa locadora: " + lista.size());
+            }
+        } catch (Exception e) {
+            System.err.println("Erro ao listar funcionários: " + e.getMessage());
+        }
+    }
+}

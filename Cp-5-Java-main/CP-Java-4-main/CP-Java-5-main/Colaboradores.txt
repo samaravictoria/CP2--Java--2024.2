@@ -1,0 +1,5 @@
+Nome: Wesley Sena       RM: 558043
+Nome: Samara Victoria   RM: 558719
+Nome: Vanessa Yukari    RM: 558092
+
+Obs: O pacote main é onde fizemos os testes dos métodos separadamente antes de os aplicar na classe view.
